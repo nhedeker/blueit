@@ -2,7 +2,7 @@
 
 In this assignment, you will create the server and routes for the following resources:
 
-* Topics: Read
+* Topics: Create, Read
 * Posts: Create, Read, Read Posts by Topic
 * Users: Create User (with proper registration security).
 
