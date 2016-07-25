@@ -22,7 +22,7 @@ router.post('/user', ev(validations.post), (req, res, next) => {
         throw (boom.create(400, 'Username already exists.'));
       }
 
-      return bcrypt.hash(password, 12));
+      return bcrypt.hash(password, 12);
     )
     .then((hashedPassword) => {
       const newUser = { username, hashedPassword, firstName, lastName};
