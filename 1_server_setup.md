@@ -7,3 +7,7 @@ In this assignment, you will create the server and routes for the following reso
 * Users: Create User (with proper registration security).
 
 For your convenience, we have provided migrations, seeds, and validations for use in your code.
+
+## Bonus
+
+Add tests for your routes using Mocha, Chai, and supertest.
