@@ -19,12 +19,30 @@ router.post('/user', ev(validations.post), (req, res, next) => {
     .first()
     .then((exists) => {
       if (exists) {
-        throw (boom.create(400, 'Username is already taken.'));
+        throw (boom.create(400, 'Username already exists.'));
       }
 
       return bcrypt.hash(password, 12));
     )
-    .then((has))
+    .then((hashedPassword) => {
+      const newUser = { username, hashedPassword, firstName, lastName};
+
+      const row = decamelizeKeys(newUser);
+
+      return knex('users').insert(row, '*');
+    })
+    .then((rows) => {
+      const user = camlizeKeys(rows[0]);
+
+      delete user.hashedPassword;
+
+      req.session.userId = userId;
+
+      res.send(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 module.exports = router;
