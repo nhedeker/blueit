@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 const morgan = require('morgan');
+
 switch (app.get('env')) {
   case 'development':
     app.use(morgan('dev'));
