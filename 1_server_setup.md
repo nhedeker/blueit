@@ -8,7 +8,7 @@ In this assignment, you will create the server and routes for the following reso
 
 For your convenience, we have provided migrations, seeds, and validations for use in your code.
 
-**NOTE** Do not worry about authentication yet. It will be included later in the project. Use user id `1` for creating posts when assigning it to a user in the meantime.
+**NOTE** Do not worry about authentication yet. It will be included later in the project. Use user id `1` for creating posts when assigning it to a user in the meantime. This is the user identified in the seed file.
 
 ## Bonus
 
