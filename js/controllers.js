@@ -39,7 +39,6 @@
     this.postForm = {};
 
     this.submitPost = () => {
-      console.log('sumbitting');
       console.log('id' + this.postForm.topicId);
       const now = Date.now();
       this.data.push({
@@ -47,13 +46,14 @@
         description: this.postForm.description,
         rating: 0,
         title: this.postForm.title,
-        topic_id: this.postForm.topicId,
+        topic_id: Number.parseInt(this.postForm.topicId),
         image_url: this.postForm.imgUrl,
         user_id: 1,
         created_at: now,
         updated_at: now
       });
-      console.log('finished submitting');
+
+      console.log(this.data[this.data.length - 1].created_at);
       console.log(this.data);
 
       $('#postTrigger').closeModal();
@@ -70,14 +70,14 @@
 
     this.data = [
       {
-        "created_at": "2016-06-20T14:26:16.000Z",
+        "created_at": new Date("2016-06-20T14:26:16.000Z").getTime(),
         "description": "What an awesome story.",
         "id": 1,
         "image_url": "https://b.thumbs.redditmedia.com/WTeAOJlQ98AfIVn7BjV_cDrDLXMuowwmJVo1p1xX5yg.jpg",
         "rating": 6,
         "title": "Dogs Are Not Allowed On NYC Subway Unless They're In A Carrier… So This Happened",
         "topic_id": 1,
-        "updated_at": "2016-07-23T14:26:16.000Z",
+        "updated_at": new Date("2016-07-23T14:26:16.000Z").getTime(),
         "user_id": 1
       },
       {
