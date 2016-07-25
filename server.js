@@ -12,6 +12,8 @@ const port = process.env.PORT || 8000;
 app.disable('x-powered-by');
 
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+
 
 switch (app.get('env')) {
   case 'development':

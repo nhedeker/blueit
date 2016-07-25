@@ -39,4 +39,7 @@ jspm_packages
 
 # Natasha's Ignores
 .env
+<<<<<<< 22efbe8d9fc5d07f9cac37f99661d1de049180a1
 pg
+=======
+>>>>>>> Inital commit
