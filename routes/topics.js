@@ -23,8 +23,7 @@ router.get('/topics', (_req, res, next) => {
 
 router.post('/topics', ev(validations.post), (req, res, next) => {
   const { name } = req.body;
-  const newTopic = { name };
-  const row = decamelizeKeys(newTopic);
+  const row = decamelizeKeys({ name });
 
   knex('topics')
     .insert(row, '*')

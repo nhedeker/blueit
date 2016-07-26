@@ -23,19 +23,19 @@ router.get('/posts', (_req, res, next) => {
     });
 });
 
-router.get('/posts/topic:id', (req, res, next) => {
-  const id = Number.parseInt(req.params.id);
+router.get('/posts/topic:topicId', (req, res, next) => {
+  const topicId = Number.parseInt(req.params.id);
 
-  if (Number.isNaN(id)) {
-    return next(boom.create(400, 'Request parameter id must be a valid id topic id'));
+  if (Number.isNaN(topicId)) {
+    return next(boom.create(400, 'Invalid Topic Id'));
   }
 
   knex('topics')
-    .where('id', id)
+    .where('id', topicId)
     .first()
     .then((topic) => {
       if (!topic) {
-        throw boom.create(404, 'Not Found');
+        throw boom.create(404, 'Topic Not Found');
       }
 
       return knex('posts')
@@ -43,9 +43,6 @@ router.get('/posts/topic:id', (req, res, next) => {
         .orderBy('updated_at');
     })
     .then((rows) => {
-      if (rows.length <= 0) {
-        res.send('No posts have been created under that topic');
-      }
       const posts = camelizeKeys(rows);
 
       res.send(posts);
