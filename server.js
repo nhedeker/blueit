@@ -7,7 +7,6 @@ if (process.env.NODE_ENV !== 'production') {
 const morgan = require('morgan');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 8000;
 
 app.disable('x-powered-by');
 
@@ -58,6 +57,8 @@ app.use((err, _req, res, _next) => {
   console.error(err.stack);
   res.sendStatus(500);
 });
+
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   if (app.get('env') !== 'test') {
