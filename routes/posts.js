@@ -9,14 +9,6 @@ const boom = require('boom');
 
 const router = express.Router();
 
-const checkAuth = function(req, res, next) {
-  if (!req.session.userId) {
-    return next(boom.create(401, 'Unauthorized'));
-  }
-
-  next();
-};
-
 router.get('/posts', (_req, res, next) => {
   knex('posts')
     .orderBy('title')
@@ -60,9 +52,9 @@ router.get('/posts/topic', (req, res, next) => {
     });
 });
 
-router.post('/posts', checkAuth, ev(validations.post), (req, res, next) => {
+router.post('/posts', ev(validations.post), (req, res, next) => {
   const { title, imageUrl, description, topicId } = req.body;
-  const { userId } = req.session;
+  const userId = 1;
   const newPost = { title, imageUrl, description, topicId, userId };
 
   const row = decamelizeKeys(newPost);

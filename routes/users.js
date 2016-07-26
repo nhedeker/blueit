@@ -36,8 +36,6 @@ router.post('/user', ev(validations.post), (req, res, next) => {
 
       delete user.hashedPassword;
 
-      req.session.userId = userId;
-
       res.send(user);
     })
     .catch((err) => {

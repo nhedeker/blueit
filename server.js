@@ -52,7 +52,7 @@ app.use((_req, res) => {
 app.use((err, _req, res, _next) => {
   if (err.status || err.statusCode) {
     return res
-      .status(err.status || err.statusCode)
+      .status(err.status || err.statusCode || err.output.statusCode)
       .set('Content-Type', 'text/plain')
       .send(err.message);
   }
