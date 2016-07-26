@@ -4,16 +4,15 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ silent: true });
 }
 
-const morgan = require('morgan');
 const express = require('express');
 const app = express();
 
 app.disable('x-powered-by');
 
 const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 const morgan = require('morgan');
-
-
 switch (app.get('env')) {
   case 'development':
     app.use(morgan('dev'));
@@ -26,11 +25,8 @@ switch (app.get('env')) {
   default:
 }
 
-app.use(bodyParser.json());
-
 const path = require('path');
-
-// app.use(express.static(path.join('public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const topics = require('./routes/topics');
 const posts = require('./routes/posts');
