@@ -4,14 +4,14 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ silent: true });
 }
 
+const morgan = require('morgan');
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 8000;
 
 app.disable('x-powered-by');
 
 const bodyParser = require('body-parser');
-const cookieSession = require('cookie-session');
-const morgan = require('morgan');
 
 switch (app.get('env')) {
   case 'development':
@@ -26,11 +26,6 @@ switch (app.get('env')) {
 }
 
 app.use(bodyParser.json());
-app.use(cookieSession({
-  name: 'bookshelf',
-  secret: process.env.SESSION_SECRET,
-  secure: app.get('env') === 'production'
-}));
 
 const path = require('path');
 
@@ -61,8 +56,6 @@ app.use((err, _req, res, _next) => {
   console.error(err.stack);
   res.sendStatus(500);
 });
-
-const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   if (app.get('env') !== 'test') {

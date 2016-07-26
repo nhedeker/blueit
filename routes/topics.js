@@ -2,7 +2,7 @@
 
 const express = require('express');
 const knex = require('../knex');
-const { camlizeKeys, decamelizeKeys } = require('humps');
+const { camelizeKeys, decamelizeKeys } = require('humps');
 const ev = require('express-validation');
 const validations = require('../validations/topics');
 
@@ -12,7 +12,7 @@ router.get('/topics', (_req, res, next) => {
   knex('topics')
     .orderBy('name')
     .then((rows) => {
-      const topics = camlizeKeys(rows);
+      const topics = camelizeKeys(rows);
 
       res.send(topics);
     })
@@ -29,7 +29,7 @@ router.post('/topics', ev(validations.post), (req, res, next) => {
   knex('topics')
     .insert(row, '*')
     .then((rows) => {
-      const topic = camlizeKeys(rows[0]);
+      const topic = camelizeKeys(rows[0]);
 
       res.send(topic);
     })

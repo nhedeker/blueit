@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { camlizeKeys, decamelizeKeys } = require('humps');
+const { camelizeKeys, decamelizeKeys } = require('humps');
 const ev = require('express-validation');
 const validations = require('../validations/users');
 const boom = require('boom');
@@ -23,7 +23,7 @@ router.post('/user', ev(validations.post), (req, res, next) => {
       }
 
       return bcrypt.hash(password, 12);
-    )
+    })
     .then((hashedPassword) => {
       const newUser = { username, hashedPassword, firstName, lastName};
 
@@ -32,7 +32,7 @@ router.post('/user', ev(validations.post), (req, res, next) => {
       return knex('users').insert(row, '*');
     })
     .then((rows) => {
-      const user = camlizeKeys(rows[0]);
+      const user = camelizeKeys(rows[0]);
 
       delete user.hashedPassword;
 

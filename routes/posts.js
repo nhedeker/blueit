@@ -4,7 +4,7 @@ const express = require('express');
 const knex = require('../knex');
 const ev = require('express-validation');
 const validations = require('../validations/posts');
-const { camlizeKeys, decamelizeKeys } = require('humps');
+const { camelizeKeys, decamelizeKeys } = require('humps');
 const boom = require('boom');
 
 const router = express.Router();
@@ -14,7 +14,7 @@ router.get('/posts', (_req, res, next) => {
     .orderBy('title')
     .orderBy('rating')
     .then((rows) => {
-      const posts = camlizeKeys(rows);
+      const posts = camelizeKeys(rows);
 
       res.send(posts);
     })
@@ -23,15 +23,15 @@ router.get('/posts', (_req, res, next) => {
     });
 });
 
-router.get('/posts/topic', (req, res, next) => {
-  const topicId = Number.parseInt(req.body.topicId);
+router.get('/posts/topic:id', (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
 
-  if (Number.isNaN(topicId)) {
-    return next(boom.create(400, 'TopicId must be a valid id'));
+  if (Number.isNaN(id)) {
+    return next(boom.create(400, 'Request parameter id must be a valid id topic id'));
   }
 
   knex('topics')
-    .where('id', topicId)
+    .where('id', id)
     .first()
     .then((topic) => {
       if (!topic) {
@@ -43,7 +43,10 @@ router.get('/posts/topic', (req, res, next) => {
         .orderBy('updated_at');
     })
     .then((rows) => {
-      const posts = camlizeKeys(rows);
+      if (rows.length <= 0) {
+        res.send('No posts have been created under that topic');
+      }
+      const posts = camelizeKeys(rows);
 
       res.send(posts);
     })
@@ -62,7 +65,7 @@ router.post('/posts', ev(validations.post), (req, res, next) => {
   knex('posts')
     .insert(row, '*')
     .then((rows) => {
-      const post = camlizeKeys(rows[0]);
+      const post = camelizeKeys(rows[0]);
 
       res.send(post);
     })
