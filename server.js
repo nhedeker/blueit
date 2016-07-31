@@ -43,9 +43,10 @@ app.use((_req, res) => {
 
 // eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
-  if (err.status || err.statusCode || err.output.statusCode) {
+  //status from validations, output.statusCode from boom
+  if (err.status || (err.output && err.output.statusCode)) {
     return res
-      .status(err.status || err.statusCode || err.output.statusCode)
+      .status(err.status || err.output.statusCode)
       .set('Content-Type', 'text/plain')
       .send(err.message);
   }

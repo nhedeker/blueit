@@ -1,0 +1,26 @@
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    #90caf9,
+    #90caf9 10px,
+    #b3e5fc 10px,
+    #b3e5fc 20px
+  );
+}
+
+html {
+  min-height: 100%
+}
+
+main {
+  padding-top: 3vh;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+}
+
+.brand-logo {
+  margin-left: 2vw;
+}
