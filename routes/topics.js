@@ -8,7 +8,7 @@ const validations = require('../validations/topics');
 
 const router = express.Router();
 
-router.get('/topics', (_req, res, next) => {
+router.get('/api/topics', (_req, res, next) => {
   knex('topics')
     .orderBy('name')
     .then((rows) => {
@@ -21,7 +21,7 @@ router.get('/topics', (_req, res, next) => {
     });
 });
 
-router.post('/topics', ev(validations.post), (req, res, next) => {
+router.post('/api/topics', ev(validations.post), (req, res, next) => {
   const { name } = req.body;
   const row = decamelizeKeys({ name });
 

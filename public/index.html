@@ -29,22 +29,22 @@
         <div class="input-field col s2 offset-s6">
           <select ng-model="posts.sortBy">
             <option value="-rating" selected>Rating</option>
-            <option value="topic_id">Topic</option>
-            <option value="-created_at">Date</option>
+            <option value="topicId">Topic</option>
+            <option value="-createdAt">Date</option>
           </select>
           <label>Sort By</label>
         </div>
       </div>
-      <div class="row" ng-repeat="post in posts.data | orderBy : posts.sortBy | filter : { topic_id : topicFilter }">
+      <div class="row" ng-repeat="post in posts.data | orderBy : posts.sortBy | filter : { topicId : topicFilter }">
         <div class="col s12 m10 offset-m1">
           <div class="card horizontal z-depth-1">
             <div class="valign-wrapper card-image">
-              <img ng-src="{{ post.image_url }}">
+              <img ng-src="{{ post.imageUrl }}">
             </div>
             <div class="card-stacked">
               <div class="grey-text text-darken-3 card-content">
                 <h5>{{ post.title }}</h5>
-                <p class="grey-text">Submitted {{ post.created_at | date : "M/d/yy 'at' h:mm a" }} by {{ post.user_id }} to {{ post.topic_id }}</p>
+                <p class="grey-text">Submitted {{ post.createdAt | date : "M/d/yy 'at' h:mm a" }} by {{ post.userId }} to {{ post.topicId }}</p>
                 <p>{{ post.description }}</p>
               </div>
             </div>

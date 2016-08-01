@@ -28,15 +28,6 @@ switch (app.get('env')) {
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.use(cookieSession({
-  name: 'bookshelf',
-  secret: process.env.SESSION_SECRET,
-  secure: app.get('env') === 'production'
-}));
-
-const path = require('path');
-
-// app.use(express.static(path.join('public')));
 
 const topics = require('./routes/topics');
 const posts = require('./routes/posts');

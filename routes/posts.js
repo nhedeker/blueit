@@ -9,7 +9,7 @@ const boom = require('boom');
 
 const router = express.Router();
 
-router.get('/posts', (_req, res, next) => {
+router.get('/api/posts', (_req, res, next) => {
   knex('posts')
     .orderBy('title')
     .orderBy('rating')
@@ -23,7 +23,7 @@ router.get('/posts', (_req, res, next) => {
     });
 });
 
-router.get('/posts/topic:topicId', (req, res, next) => {
+router.get('/api/posts/topic:topicId', (req, res, next) => {
   const topicId = Number.parseInt(req.params.id);
 
   if (Number.isNaN(topicId)) {
@@ -52,9 +52,8 @@ router.get('/posts/topic:topicId', (req, res, next) => {
     });
 });
 
-router.post('/posts', ev(validations.post), (req, res, next) => {
-  const { title, imageUrl, description, topicId } = req.body;
-  const userId = 1;
+router.post('/api/posts', ev(validations.post), (req, res, next) => {
+  const { title, imageUrl, description, topicId, userId } = req.body;
   const newPost = { title, imageUrl, description, topicId, userId };
 
   const row = decamelizeKeys(newPost);

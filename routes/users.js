@@ -10,7 +10,7 @@ const knex = require('../knex');
 
 const router = express.Router();
 
-router.post('/user', ev(validations.post), (req, res, next) => {
+router.post('/api/user', ev(validations.post), (req, res, next) => {
   const { username, password, firstName, lastName } = req.body;
 
   knex('users')

@@ -36,10 +36,6 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-
 # Natasha's Ignores
 .env
-<<<<<<< 8fc0fe0360fc8113d242c195e518f3b4c0a47d6e
 pg
-=======
->>>>>>> Inital commit
