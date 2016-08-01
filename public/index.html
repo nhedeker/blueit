@@ -19,88 +19,8 @@
         </div>
       </nav>
     </div>
-    <div ng-controller="PostCtrl as posts">
-
-    <main class="container light-blue lighten-5">
-      <div class="row">
-        <div class="input-field col s2 offset-s1">
-          <input ng-model="topicFilter" type="text" placeholder="Filter Posts by Topic">
-        </div>
-        <div class="input-field col s2 offset-s6">
-          <select ng-model="posts.sortBy">
-            <option value="-rating" selected>Rating</option>
-            <option value="topicId">Topic</option>
-            <option value="-createdAt">Date</option>
-          </select>
-          <label>Sort By</label>
-        </div>
-      </div>
-      <div class="row" ng-repeat="post in posts.data | orderBy : posts.sortBy | filter : { topicId : topicFilter }">
-        <div class="col s12 m10 offset-m1">
-          <div class="card horizontal z-depth-1">
-            <div class="valign-wrapper card-image">
-              <img ng-src="{{ post.imageUrl }}">
-            </div>
-            <div class="card-stacked">
-              <div class="grey-text text-darken-3 card-content">
-                <h5>{{ post.title }}</h5>
-                <p class="grey-text">Submitted {{ post.createdAt | date : "M/d/yy 'at' h:mm a" }} by {{ post.userId }} to {{ post.topicId }}</p>
-                <p>{{ post.description }}</p>
-              </div>
-            </div>
-            <div>
-              <p>{{ post.rating }}</p>
-              <a><i ng-click="posts.thumbsUp(post)" class="material-icons">thumb_up</i></a>
-              <a><i ng-click="posts.thumbsDown(post)" class="material-icons">thumb_down</i></a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <main ng-view class="container light-blue lighten-5">
     </main>
-
-    <div class="fixed-action-btn" style="top: 9vh; right: 9vw;">
-      <a class="btn-floating btn-large orange modal-trigger" href="#postTrigger">
-        <i class="large material-icons">mode_edit</i>
-      </a>
-    </div>
-
-    <!-- Post Modal Structure -->
-    <div id="postTrigger" class="modal">
-      <form ng-submit="posts.submitPost(); postForm.$setPristine();" name="postForm" novalidate>
-        <div class="modal-content">
-          <div class="input-field">
-            <input type="text" name="title" ng-class="{'valid': postForm.title.$valid, 'invalid': postForm.title.$invalid && postForm.title.$dirty}" ng-model="posts.postForm.title" ng-minlength=3 required>
-
-            <label for="title" ng-class="{'green-text text-lighten-2': postForm.title.$valid, 'red-text text-lighten-2': postForm.title.$invalid && postForm.title.$dirty}">Title</label>
-
-            <span ng-show="postForm.title.$error.minlength && postForm.title.$dirty">Post title must be at least 3 characters</span>
-          </div>
-          <div class="input-field">
-            <input type="url" name="imgUrl" ng-class="{'valid': postForm.imgUrl.$valid, 'invalid': postForm.imgUrl.$invalid && postForm.imgUrl.$dirty}" ng-model="posts.postForm.imgUrl" required>
-
-            <label for="imgUrl" ng-class="{'green-text text-lighten-2': postForm.imgUrl.$valid, 'red-text text-lighten-2': postForm.imgUrl.$invalid && postForm.imgUrl.$dirty}">Image Url</label>
-
-            <span ng-show="postForm.imgUrl.$invalid && postForm.imgUrl.$dirty">Please provide a valid image url</span>
-          </div>
-          <div class="input-field">
-            <textarea type="textarea" class="materialize-textarea" name="description" ng-class="{'valid': postForm.description.$valid, 'invalid': postForm.description.$invalid && postForm.description.$dirty}" ng-model="posts.postForm.description" ng-minlength=3 required></textarea>
-
-            <label for="description" ng-class="{'green-text text-lighten-2': postForm.description.$valid, 'red-text text-lighten-2': postForm.description.$invalid && postForm.description.$dirty}">Post Content</label>
-
-            <span ng-show="postForm.description.$error.minlength && postForm.description.$dirty">Post content must contain at least 3 characters</span>
-          </div>
-          <div class="input-field">
-            <select ng-model="posts.postForm.topicId" class="browser-default" required>
-              <option value="" disabled selected>Choose Post Topic</option>
-              <option ng-repeat="topic in topics.data" value="{{topic.id}}">{{topic.name}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <input type="submit" class="btn orange darken-1 right" ng-class="{'disabled': postForm.$invalid, 'waves-effect waves-light': postForm.$valid}" value="Add Post" ng-disabled="postForm.$invalid">
-        </div>
-      </form>
-    </div>
 
     <!-- Topic Modal Structure -->
     <div id="topicTrigger" class="modal">
@@ -120,15 +40,16 @@
         </div>
       </form>
     </div>
-  </div>
 
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/materialize.min.js"></script>
     <script src="js/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
     <script src="js/app.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/controllers.js"></script>
-    <script src="js/materialize.min.js"></script>
-    <script src="js/controllers.js"></script>
+    <script src="js/app.config.js"></script>
+    <!-- <script src="js/materialize.min.js"></script>
+    <script src="js/controllers.js"></script> -->
   </body>
 </html>

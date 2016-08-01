@@ -3,5 +3,5 @@
   $('select').material_select();
   $('.modal-trigger').leanModal();
 
-  angular.module('blueitApp', []);
+  angular.module('blueitApp', ['ngRoute']);
 })();

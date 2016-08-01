@@ -62,9 +62,7 @@
         })
         .then((res) => {
           this.data.push(res.data);
-          $('#postTrigger').closeModal();
           this.postForm = {};
-          console.log(this.data);
         })
         .catch((err) => {
           throw err;
@@ -83,7 +81,6 @@
       return $http.get(`${server}/posts`)
         .then((posts) => {
           this.data = posts.data;
-          console.log(this.data);
         })
         .catch((err) => {
           throw err;

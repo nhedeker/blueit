@@ -1,0 +1,39 @@
+<div class="container">
+  <h4>Create a New Post</h4>
+  <div class="white">
+<form ng-submit="posts.submitPost(); postForm.$setPristine();" name="postForm" novalidate>
+  <div>
+    <div class="input-field">
+      <input type="text" name="title" ng-class="{'valid': postForm.title.$valid, 'invalid': postForm.title.$invalid && postForm.title.$dirty}" ng-model="posts.postForm.title" ng-minlength=3 required>
+
+      <label for="title" ng-class="{'green-text text-lighten-2': postForm.title.$valid, 'red-text text-lighten-2': postForm.title.$invalid && postForm.title.$dirty}">Title</label>
+
+      <span ng-show="postForm.title.$error.minlength && postForm.title.$dirty">Post title must be at least 3 characters</span>
+    </div>
+    <div class="input-field">
+      <input type="url" name="imgUrl" ng-class="{'valid': postForm.imgUrl.$valid, 'invalid': postForm.imgUrl.$invalid && postForm.imgUrl.$dirty}" ng-model="posts.postForm.imgUrl" required>
+
+      <label for="imgUrl" ng-class="{'green-text text-lighten-2': postForm.imgUrl.$valid, 'red-text text-lighten-2': postForm.imgUrl.$invalid && postForm.imgUrl.$dirty}">Image Url</label>
+
+      <span ng-show="postForm.imgUrl.$invalid && postForm.imgUrl.$dirty">Please provide a valid image url</span>
+    </div>
+    <div class="input-field">
+      <textarea type="textarea" class="materialize-textarea" name="description" ng-class="{'valid': postForm.description.$valid, 'invalid': postForm.description.$invalid && postForm.description.$dirty}" ng-model="posts.postForm.description" ng-minlength=3 required></textarea>
+
+      <label for="description" ng-class="{'green-text text-lighten-2': postForm.description.$valid, 'red-text text-lighten-2': postForm.description.$invalid && postForm.description.$dirty}">Post Content</label>
+
+      <span ng-show="postForm.description.$error.minlength && postForm.description.$dirty">Post content must contain at least 3 characters</span>
+    </div>
+    <div class="input-field">
+      <select ng-model="posts.postForm.topicId" class="browser-default" required>
+        <option value="" disabled selected>Choose Post Topic</option>
+        <option ng-repeat="topic in topics.data" value="{{topic.id}}">{{topic.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <input type="submit" class="btn orange darken-1 right" ng-class="{'disabled': postForm.$invalid, 'waves-effect waves-light': postForm.$valid}" value="Add Post" ng-disabled="postForm.$invalid">
+  </div>
+</form>
+</div>
+</div>
