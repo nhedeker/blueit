@@ -1,25 +1,22 @@
 (function() {
   'use strict';
 
-  const server="/api";
-
   const app = angular.module('blueitApp');
+  const server="/api";
 
   // NEW FILE
   app.controller('TopicCtrl', TopicCtrl);
 
-  TopicCtrl.$inject = ['$http'];
+  TopicCtrl.$inject = ['topicsSvc'];
 
-  function TopicCtrl($http) {
+  function TopicCtrl(topicsSvc) {
     this.topicForm = {};
     this.data = [];
 
     this.submitTopic = () => {
-      return $http.post(`${server}/topics`, {
-        name: this.topicForm.name
-        })
-        .then((res) => {
-          this.data.push(res.data);
+      topicsSvc.submitTopic(this.topicForm.name)
+        .then((topic) => {
+          this.data.push(topic);
           $('#topicTrigger').closeModal();
           this.topicForm = {};
         })
@@ -29,13 +26,12 @@
     };
 
     const activate = () => {
-      return $http.get(`${server}/topics`)
-        .then((topics) => {
-          this.data = topics.data
-        })
-        .catch((err) => {
-          throw err;
-        });
+      topicsSvc.getTopics().then((topics) => {
+        this.data = topics;
+      })
+      .catch((err) => {
+        throw err;
+      });
     };
 
     activate();
@@ -44,24 +40,24 @@
   // NEW FILE
   app.controller('PostCtrl', PostCtrl);
 
-  PostCtrl.$inject = ['$http'];
+  PostCtrl.$inject = ['$scope', 'postsSvc'];
 
-  function PostCtrl($http) {
+  function PostCtrl($scope, postsSvc) {
     this.data = [];
     this.filterBy = '';
     this.sortBy = '-rating';
     this.postForm = {};
 
     this.submitPost = () => {
-      return $http.post(`${server}/posts`, {
+      postsSvc.submitPost({
         description: this.postForm.description,
         title: this.postForm.title,
         topicId: Number.parseInt(this.postForm.topicId),
         imageUrl: this.postForm.imgUrl,
         userId: 1
         })
-        .then((res) => {
-          this.data.push(res.data);
+        .then((post) => {
+          this.data.push(post);
           this.postForm = {};
         })
         .catch((err) => {
@@ -78,15 +74,17 @@
     };
 
     const activate = () => {
-      return $http.get(`${server}/posts`)
-        .then((posts) => {
-          this.data = posts.data;
-        })
-        .catch((err) => {
-          throw err;
-        });
+      postsSvc.getPosts().then((posts) => {
+        this.data = posts;
+      })
+      .catch((err) => {
+        throw err;
+      });
     };
 
     activate();
+    $scope.$watch('sortBy', () => {
+      $('select').material_select();
+    });
   };
 })();
