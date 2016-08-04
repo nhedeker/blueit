@@ -35,8 +35,10 @@
   </div>
 </div>
 
-<div class="fixed-action-btn" style="top: 9vh; right: 9vw;">
-  <a class="btn-floating btn-large orange" ng-href="#/posts">
-    <i class="large material-icons">mode_edit</i>
-  </a>
+<div ng-controller="AuthCtrl as authCtrl">
+  <div ng-show="authCtrl.isLoggedIn()" class="fixed-action-btn" style="top: 9vh; right: 9vw;">
+    <a class="btn-floating btn-large orange" ng-href="#/posts">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+  </div>
 </div>

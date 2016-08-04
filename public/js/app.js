@@ -2,5 +2,5 @@
   'use strict';
   $('.modal-trigger').leanModal();
 
-  angular.module('blueitApp', ['ngRoute']);
+  angular.module('blueitApp', ['ngRoute', 'ngCookies']);
 })();

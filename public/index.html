@@ -12,9 +12,11 @@
     <div class="navbar-fixed">
       <nav class="blue darken-3 z-depth-1">
         <div class="nav-wrapper">
-          <a href="#/" class="brand-logo">Blueit</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#topicTrigger" class="modal-trigger">Create Topic</a></li>
+          <a ng-href="#/" class="brand-logo left">Blueit</a>
+          <ul ng-controller="AuthCtrl as authCtrl" class="right">
+            <li ng-show="authCtrl.isLoggedIn()"><a href="#topicTrigger" class="modal-trigger">Create Topic</a></li>
+            <li ng-show="authCtrl.isLoggedIn()"><a ng-href="#/" ng-click="authCtrl.logout()">Logout</a></li>
+            <li ng-show="!authCtrl.isLoggedIn()"><a ng-href="#/login">Login</a></li>
           </ul>
         </div>
       </nav>
@@ -45,11 +47,11 @@
     <script src="js/materialize.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/controllers.js"></script>
     <script src="js/app.config.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
     <!-- <script src="js/materialize.min.js"></script> -->
     <!-- <script src="js/controllers.js"></script> -->
   </body>

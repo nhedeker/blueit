@@ -12,6 +12,7 @@ app.disable('x-powered-by');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 switch (app.get('env')) {
   case 'development':
@@ -25,14 +26,19 @@ switch (app.get('env')) {
   default:
 }
 
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+const token = require('./routes/token');
 const topics = require('./routes/topics');
 const posts = require('./routes/posts');
 const users = require('./routes/users');
 
+app.use(token);
 app.use(topics);
 app.use(posts);
 app.use(users);

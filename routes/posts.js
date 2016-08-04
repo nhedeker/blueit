@@ -6,6 +6,7 @@ const ev = require('express-validation');
 const validations = require('../validations/posts');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 const boom = require('boom');
+const { checkAuth } = require('../middleware');
 
 const router = express.Router();
 
@@ -52,8 +53,10 @@ router.get('/api/posts/topic:topicId', (req, res, next) => {
     });
 });
 
-router.post('/api/posts', ev(validations.post), (req, res, next) => {
-  const { title, imageUrl, description, topicId, userId } = req.body;
+router.post('/api/posts', checkAuth, ev(validations.post), (req, res, next) => {
+  const { title, imageUrl, description, topicId } = req.body;
+  const { userId } = req.token;
+
   const newPost = { title, imageUrl, description, topicId, userId };
 
   const row = decamelizeKeys(newPost);

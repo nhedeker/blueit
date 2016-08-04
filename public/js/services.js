@@ -6,9 +6,11 @@
 
   app.factory('topicsSvc', topicsSvc);
   app.factory('postsSvc', postsSvc);
+  app.factory('authSvc', authSvc);
 
   topicsSvc.$inject = ['$http'];
   postsSvc.$inject = ['$http'];
+  authSvc.$inject = ['$http'];
 
   function topicsSvc($http) {
     return {
@@ -48,6 +50,29 @@
       },
       getPosts: () => {
         return $http.get(`${server}/posts`)
+          .then((res) => {
+            return res.data;
+          })
+          .catch((err) => {
+            throw err;
+          });
+      }
+    };
+  };
+
+  function authSvc($http) {
+    return {
+      login: (username, password) => {
+        return $http.post(`${server}/token`, { username, password })
+          .then((res) => {
+            return res.data;
+          })
+          .catch((err) => {
+            throw err;
+          });
+      },
+      logout: () => {
+        return $http.delete(`${server}/token`)
           .then((res) => {
             return res.data;
           })

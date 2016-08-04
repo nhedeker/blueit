@@ -40,9 +40,9 @@
   // NEW FILE
   app.controller('PostCtrl', PostCtrl);
 
-  PostCtrl.$inject = ['$scope', 'postsSvc'];
+  PostCtrl.$inject = ['$scope', 'postsSvc', '$location'];
 
-  function PostCtrl($scope, postsSvc) {
+  function PostCtrl($scope, postsSvc, $location) {
     this.data = [];
     this.filterBy = '';
     this.sortBy = '-rating';
@@ -53,12 +53,12 @@
         description: this.postForm.description,
         title: this.postForm.title,
         topicId: Number.parseInt(this.postForm.topicId),
-        imageUrl: this.postForm.imgUrl,
-        userId: 1
+        imageUrl: this.postForm.imgUrl
         })
         .then((post) => {
           this.data.push(post);
           this.postForm = {};
+          $location.path('/');
         })
         .catch((err) => {
           throw err;
@@ -86,5 +86,37 @@
     $scope.$watch('sortBy', () => {
       $('select').material_select();
     });
+  };
+
+  // NEW FILE
+  app.controller('AuthCtrl', AuthCtrl);
+
+  AuthCtrl.$inject = ['authSvc', '$location', '$cookies'];
+
+  function AuthCtrl(authSvc, $location, $cookies) {
+    this.username = '';
+    this.password = '';
+
+    this.isLoggedIn = () => {
+      return $cookies.get('loggedIn');
+    };
+
+    this.login = () => {
+      authSvc.login(this.username, this.password)
+        .then((user) => {
+          $location.path('/');
+          this.username = '';
+          this.password = '';
+        })
+        .catch((err) => {
+          alert('Login Failed');
+        });
+    };
+
+    this.logout = () => {
+      this.username = '';
+      this.password = '';
+      authSvc.logout();
+    };
   };
 })();

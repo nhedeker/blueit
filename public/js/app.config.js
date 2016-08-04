@@ -14,6 +14,11 @@
         templateUrl: 'submitPost.html',
         controller: 'PostCtrl',
         controllerAs: 'posts'
+      })
+      .when('/login', {
+        templateUrl: 'login.html',
+        controller: 'AuthCtrl',
+        controllerAs: 'authCtrl'
       });
   });
 })();
