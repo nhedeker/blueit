@@ -12,26 +12,7 @@
       <label>Sort By</label>
     </div>
   </div>
-  <div class="row" ng-repeat="post in posts.data | orderBy : posts.sortBy | filter : { topicId : topicFilter }">
-    <div class="col s12 m10 offset-m1">
-      <div class="card horizontal z-depth-1">
-        <div class="valign-wrapper card-image">
-          <img ng-src="{{ post.imageUrl }}">
-        </div>
-        <div class="card-stacked">
-          <div class="grey-text text-darken-3 card-content">
-            <h5>{{ post.title }}</h5>
-            <p class="grey-text">Submitted {{ post.createdAt | date : "M/d/yy 'at' h:mm a" }} by {{ post.userId }} to {{ post.topicId }}</p>
-            <p>{{ post.description }}</p>
-          </div>
-        </div>
-        <div>
-          <p>{{ post.rating }}</p>
-          <a><i ng-click="posts.thumbsUp(post)" class="material-icons">thumb_up</i></a>
-          <a><i ng-click="posts.thumbsDown(post)" class="material-icons">thumb_down</i></a>
-        </div>
-      </div>
-    </div>
+  <div class="row" nh-posts ng-repeat="postInDirective in posts.data | orderBy : posts.sortBy | filter : { topicId : topicFilter }" post-attribute="postInDirective">
   </div>
 </div>
 

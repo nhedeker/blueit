@@ -1,0 +1,19 @@
+<div class="col s12 m10 offset-m1">
+  <div class="card horizontal z-depth-1">
+    <div class="valign-wrapper card-image">
+      <img ng-src="{{ postInDirective.imageUrl }}">
+    </div>
+    <div class="card-stacked">
+      <div class="grey-text text-darken-3 card-content">
+        <h5>{{ postInDirective.title }}</h5>
+        <p class="grey-text">Submitted {{ postInDirective.createdAt | date : "M/d/yy 'at' h:mm a" }} by {{ postInDirective.userId }} to {{ postInDirective.topicId }}</p>
+        <p>{{ postInDirective.description }}</p>
+      </div>
+    </div>
+    <div>
+      <p>{{ postInDirective.rating }}</p>
+      <a><i ng-click="posts.thumbsUp(post)" class="material-icons">thumb_up</i></a>
+      <a><i ng-click="posts.thumbsDown(post)" class="material-icons">thumb_down</i></a>
+    </div>
+  </div>
+</div>
