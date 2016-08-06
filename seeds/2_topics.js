@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 'use strict';
 
 exports.seed = function(knex) {

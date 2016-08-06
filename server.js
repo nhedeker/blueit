@@ -9,10 +9,11 @@ const app = express();
 
 app.disable('x-powered-by');
 
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 switch (app.get('env')) {
   case 'development':
@@ -49,7 +50,7 @@ app.use((_req, res) => {
 
 // eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
-  //status from validations, output.statusCode from boom
+  // status from validations, output.statusCode from boom
   if (err.status || (err.output && err.output.statusCode)) {
     return res
       .status(err.status || err.output.statusCode)
@@ -73,4 +74,4 @@ app.listen(port, () => {
 
 module.exports = app;
 
-//for git add
+// for git add

@@ -8,6 +8,7 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 const boom = require('boom');
 const { checkAuth } = require('../middleware');
 
+// eslint-disable-next-line new-cap
 const router = express.Router();
 
 router.get('/api/posts', (_req, res, next) => {

@@ -1,9 +1,11 @@
+/* eslint-disable strict, no-undef */
+
 (function() {
   'use strict';
 
   const app = angular.module('blueitApp');
 
-  app.config(function($routeProvider) {
+  app.config(($routeProvider) => {
     $routeProvider
       .when('/', {
         templateUrl: 'home.html',
@@ -19,6 +21,11 @@
         templateUrl: 'login.html',
         controller: 'AuthCtrl',
         controllerAs: 'authCtrl'
+      })
+      .when('/register', {
+        templateUrl: 'register.html',
+        controller: 'UserCtrl',
+        controllerAs: 'users'
       });
   });
 })();

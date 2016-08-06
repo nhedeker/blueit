@@ -7,6 +7,7 @@ const knex = require('../knex');
 const { camelizeKeys } = require('humps');
 const jwt = require('jsonwebtoken');
 
+// eslint-disable-next-line new-cap
 const router = express.Router();
 
 router.post('/api/token', (req, res, next) => {

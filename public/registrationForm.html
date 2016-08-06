@@ -1,34 +1,37 @@
-<form ng-submit="posts.submitPost();  postForm.$setPristine();" name="postForm" novalidate>
+<form ng-submit="users.registerUser(); userForm.$setPristine();" name="userForm" novalidate>
   <div>
     <div class="input-field">
-      <input type="text" name="title" ng-class="{'valid': postForm.title.$valid, 'invalid': postForm.title.$invalid && postForm.title.$dirty}"  ng-model="posts.postForm.title" ng-minlength=3  required>
+      <input type="text" name="username" ng-class="{'valid': userForm.username.$valid, 'invalid': userForm.username.$invalid && userForm.username.$dirty}"  ng-model="users.userForm.username" ng-minlength=3 ng-maxlength=20 required>
 
-      <label for="title" ng-class="{'green-text   text-lighten-2': postForm.title.$valid, 'red-text text-lighten-2': postForm.title.$invalid &&  postForm.title.$dirty}">Title</label>
+      <label for="username" ng-class="{'green-text text-lighten-2': userForm.username.$valid, 'red-text text-lighten-2': userForm.username.$invalid && userForm.username.$dirty}">Username</label>
 
-      <span ng-show="postForm.title.$error.minlength && postForm.title.$dirty">Post title must be at least 3 characters</span>
+      <span ng-show="(userForm.username.$error.minlength || userForm.username.$error.maxlength) && userForm.title.$dirty">Username must be between 3-20 characters</span>
+
+      <!-- <span ng-show="user.usernameExists">Username already exists</span> -->
     </div>
     <div class="input-field">
-      <input type="url" name="imgUrl" ng-class="{'valid':  postForm.imgUrl.$valid, 'invalid': postForm.imgUrl.$invalid && postForm.imgUrl.$dirty}"  ng-model="posts.postForm.imgUrl" required>
+      <input type="password" name="password" ng-class="{'valid':  userForm.password.$valid, 'invalid': userForm.password.$invalid && userForm.password.$dirty}"  ng-model="users.userForm.password" required>
 
-      <label for="imgUrl" ng-class="{'green-text  text-lighten-2': postForm.imgUrl.$valid, 'red-text text-lighten-2': postForm.imgUrl.$invalid &&  postForm.imgUrl.$dirty}">Image Url</label>
+      <label for="password" ng-class="{'green-text text-lighten-2': userForm.password.$valid, 'red-text text-lighten-2': userForm.password.$invalid &&  userForm.password.$dirty}">Password</label>
 
-      <span ng-show="postForm.imgUrl.$invalid &&  postForm.imgUrl.$dirty">Please provide a valid image url</span>
+      <span ng-show="userForm.password.$invalid &&  userForm.password.$dirty">Please provide a valid password</span>
     </div>
     <div class="input-field">
-      <textarea type="textarea" class="materialize-textarea" name="description" ng-class="{'valid': postForm.description.$valid, 'invalid': postForm.description.$invalid &&  postForm.description.$dirty}"  ng-model="posts.postForm.description" ng-minlength=3 required></textarea>
+      <input type="text" name="firstName" ng-class="{'valid':  userForm.firstName.$valid, 'invalid': userForm.firstName.$invalid && userForm.firstName.$dirty}" ng-model="users.userForm.firstName" required>
 
-      <label for="description" ng-class="{'green-text  text-lighten-2': postForm.description.$valid,  'red-text text-lighten-2': postForm.description.$invalid && postForm.description.$dirty}">Post Content</label>
+      <label for="firstName" ng-class="{'green-text text-lighten-2': userForm.firstName.$valid, 'red-text text-lighten-2': userForm.firstName.$invalid &&  userForm.firstName.$dirty}">First Name</label>
 
-      <span ng-show="postForm.description.$error.minlength && postForm.description.$dirty">Post content must contain at least 3 characters</span>
+      <span ng-show="userForm.firstName.$invalid &&  userForm.firstName.$dirty">Please provide a valid first name</span>
     </div>
     <div class="input-field">
-      <select ng-model="posts.postForm.topicId" class="browser-default" required>
-        <option value="" disabled selected>Choose Post Topic</option>
-        <option ng-repeat="topic in topics.data" value="{{topic.id}}">{{topic.name}}</option>
-      </select>
+      <input type="text" name="lastName" ng-class="{'valid':  userForm.lastName.$valid, 'invalid': userForm.lastName.$invalid && userForm.lastName.$dirty}" ng-model="users.userForm.lastName" required>
+
+      <label for="lastName" ng-class="{'green-text text-lighten-2': userForm.lastName.$valid, 'red-text text-lighten-2': userForm.lastName.$invalid &&  userForm.lastName.$dirty}">Last Name</label>
+
+      <span ng-show="userForm.lastName.$invalid &&  userForm.lastName.$dirty">Please provide a valid last name</span>
     </div>
   </div>
   <div>
-    <input type="submit" class="btn orange darken-1 right" ng-class="{'disabled': postForm.$invalid, 'waves-effect waves-light': postForm.$valid}" value="Add Post" ng-disabled="postForm.$invalid">
+    <input type="submit" class="btn orange darken-1 right" ng-class="{'disabled': userForm.$invalid, 'waves-effect waves-light': userForm.$valid}" value="Register" ng-disabled="userForm.$invalid">
   </div>
 </form>

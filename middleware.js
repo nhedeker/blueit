@@ -1,3 +1,4 @@
+/* eslint-disable max-len, lines-around-comment */
 'use strict';
 
 const jwt = require('jsonwebtoken');
@@ -11,7 +12,7 @@ const checkAuth = (req, res, next) => {
     req.token = decoded;
     // req.token.userId
     next();
-  })
+  });
 };
 
 module.exports = { checkAuth };

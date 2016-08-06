@@ -1,8 +1,10 @@
+/* eslint-disable strict, no-undef, max-statements, no-use-before-define, func-style, max-len */
+
 (function() {
   'use strict';
 
   const app = angular.module('blueitApp');
-  const server="/api";
+  const server = '/api';
 
   app.factory('topicsSvc', topicsSvc);
   app.factory('postsSvc', postsSvc);
@@ -35,12 +37,13 @@
           });
       }
     };
-  };
+  }
 
   function postsSvc($http) {
     const convertTimestamps = (post) => {
       post.createdAt = new Date(post.createdAt).getTime();
       post.updatedAt = new Date(post.updatedAt).getTime();
+
       return post;
     };
 
@@ -64,7 +67,7 @@
           });
       }
     };
-  };
+  }
 
   function authSvc($http) {
     return {
@@ -96,19 +99,10 @@
           });
       }
     };
-  };
+  }
 
   function userSvc($http) {
     return {
-      // submitPost: (post) => {
-      //   return $http.post(`${server}/posts`, post)
-      //     .then((res) => {
-      //       return convertTimestamps(res.data);
-      //     })
-      //     .catch((err) => {
-      //       throw err;
-      //     });
-      // },
       getUsers: () => {
         return $http.get(`${server}/users`)
           .then((res) => {
@@ -119,5 +113,5 @@
           });
       }
     };
-  };
+  }
 })();

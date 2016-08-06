@@ -1,8 +1,9 @@
+/* eslint-disable strict, no-undef, max-statements, no-use-before-define, func-style, no-alert, max-len */
+
 (function() {
   'use strict';
 
   const app = angular.module('blueitApp');
-  const server="/api";
 
   // NEW FILE
   app.controller('TopicCtrl', TopicCtrl);
@@ -30,12 +31,13 @@
         this.data = topics;
       })
       .catch((err) => {
+        alert(err.data);
         throw err;
       });
     };
 
     activate();
-  };
+  }
 
   // NEW FILE
   app.controller('PostCtrl', PostCtrl);
@@ -54,23 +56,24 @@
         title: this.postForm.title,
         topicId: Number.parseInt(this.postForm.topicId),
         imageUrl: this.postForm.imgUrl
-        })
+      })
         .then((post) => {
           this.data.push(post);
           this.postForm = {};
           $location.path('/');
         })
         .catch((err) => {
+          alert(err.data);
           throw err;
         });
     };
 
     this.thumbsUp = (post) => {
-      post.rating++;
+      post.rating += 1;
     };
 
     this.thumbsDown = (post) => {
-      post.rating--;
+      post.rating -= 1;
     };
 
     const activate = () => {
@@ -78,6 +81,7 @@
         this.data = posts;
       })
       .catch((err) => {
+        alert(err.data);
         throw err;
       });
     };
@@ -86,7 +90,7 @@
     $scope.$watch('sortBy', () => {
       $('select').material_select();
     });
-  };
+  }
 
   // NEW FILE
   app.controller('AuthCtrl', AuthCtrl);
@@ -103,13 +107,14 @@
 
     this.login = () => {
       authSvc.login(this.username, this.password)
-        .then((user) => {
+        .then((_user) => {
           $location.path('/');
           this.username = '';
           this.password = '';
         })
         .catch((err) => {
           alert('Login Failed');
+          throw err;
         });
     };
 
@@ -118,43 +123,74 @@
       this.password = '';
       authSvc.logout();
     };
-  };
+  }
 
   // NEW FILE
   app.controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['userSvc'];
+  UserCtrl.$inject = ['userSvc', 'authSvc', '$location'];
 
-  function UserCtrl(userSvc) {
+  function UserCtrl(userSvc, authSvc, $location) {
     this.data = [];
-    this.postForm = {};
+    this.userForm = {};
 
-    // this.registerUser = () => {
-    //   postsSvc.submitPost({
-    //     description: this.postForm.description,
-    //     title: this.postForm.title,
-    //     topicId: Number.parseInt(this.postForm.topicId),
-    //     imageUrl: this.postForm.imgUrl
-    //     })
-    //     .then((post) => {
-    //       this.data.push(post);
-    //       this.postForm = {};
-    //       $location.path('/');
-    //     })
-    //     .catch((err) => {
-    //       throw err;
-    //     });
+    // this.usernameExists = false;
+
+    // this.userExists = () => {
+    //   this.temp = this.data.filter((element) => {
+    //     return element.username === this.userForm.username;
+    //   });
+    //
+    //   if (this.temp.length > 0) {
+    //     return true;
+    //   }
+    //
+    //   return false;
     // };
+
+    this.registerUser = () => {
+      // if (this.userExists()) {
+      //   this.usernameExists = true;
+      //   return;
+      // }
+      authSvc.registerUser({
+        username: this.userForm.username,
+        password: this.userForm.password,
+        firstName: this.userForm.firstName,
+        lastName: this.userForm.lastName
+      })
+        .then((user) => {
+          // this.usernameExists = false;
+          this.data.push(user);
+          authSvc.login(user.username, this.userForm.password)
+            .then((_resUser) => {
+              $location.path('/');
+              this.userForm = {};
+            })
+            .catch((err) => {
+              alert('Login Failed');
+              throw err;
+            });
+        })
+        .catch((err) => {
+          alert(err.data);
+
+          // this.usernameExists = true;
+          // materialize.toast(err.data, 400);
+          throw err;
+        });
+    };
 
     const activate = () => {
       userSvc.getUsers().then((users) => {
         this.data = users;
       })
       .catch((err) => {
+        alert(err.data);
         throw err;
       });
     };
 
     activate();
-  };
+  }
 })();

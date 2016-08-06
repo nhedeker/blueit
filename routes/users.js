@@ -8,9 +8,10 @@ const boom = require('boom');
 const bcrypt = require('bcrypt-as-promised');
 const knex = require('../knex');
 
+// eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.post('/api/user', ev(validations.post), (req, res, next) => {
+router.post('/api/users', ev(validations.post), (req, res, next) => {
   const { username, password, firstName, lastName } = req.body;
 
   knex('users')
@@ -25,7 +26,7 @@ router.post('/api/user', ev(validations.post), (req, res, next) => {
       return bcrypt.hash(password, 12);
     })
     .then((hashedPassword) => {
-      const newUser = { username, hashedPassword, firstName, lastName};
+      const newUser = { username, hashedPassword, firstName, lastName };
 
       const row = decamelizeKeys(newUser);
 

@@ -7,6 +7,7 @@ const ev = require('express-validation');
 const validations = require('../validations/topics');
 const { checkAuth } = require('../middleware');
 
+// eslint-disable-next-line new-cap
 const router = express.Router();
 
 router.get('/api/topics', (_req, res, next) => {
@@ -22,6 +23,7 @@ router.get('/api/topics', (_req, res, next) => {
     });
 });
 
+// eslint-disable-next-line max-len
 router.post('/api/topics', checkAuth, ev(validations.post), (req, res, next) => {
   const { name } = req.body;
   const row = decamelizeKeys({ name });

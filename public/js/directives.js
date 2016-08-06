@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
+
 'use strict';
 
-const app =  angular.module('blueitApp');
+const app = angular.module('blueitApp');
 
 app.directive('nhPosts', () => {
   return {
@@ -14,12 +16,14 @@ app.directive('nhPosts', () => {
 
 app.directive('nhPostsForm', () => {
   return {
+    controller: 'PostCtrl as posts',
     templateUrl: 'postForm.html'
   };
 });
 
 app.directive('nhRegistrationForm', () => {
   return {
-    temaplateUrl: 'registrationForm.html'
+    contoller: 'UserCtrl as users',
+    templateUrl: 'registrationForm.html'
   };
 });

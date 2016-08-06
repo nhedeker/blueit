@@ -39,3 +39,4 @@ jspm_packages
 # Natasha's Ignores
 .env
 pg
+.eslintrc.js
