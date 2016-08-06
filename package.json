@@ -7,7 +7,9 @@
     "test": "mocha",
     "start": "node server.js",
     "knex": "knex",
-    "nodemon": "nodemon server.js"
+    "nodemon": "nodemon server.js",
+    "heroku-postbuild": "knex migrate:latest",
+    "nf": "nf start"
   },
   "author": "Ian Smith <ian.smith@galvanize.com>",
   "contributors": [
@@ -35,6 +37,6 @@
     "nodemon": "^1.9.2"
   },
   "engines": {
-    "node": "6.2.2"
+    "node": "6.3.1"
   }
 }
