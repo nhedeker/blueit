@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get('/api/topics', (_req, res, next) => {
   knex('topics')
-    .orderBy('name')
+    .orderBy('id')
     .then((rows) => {
       const topics = camelizeKeys(rows);
 

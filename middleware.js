@@ -9,6 +9,7 @@ const checkAuth = (req, res, next) => {
     }
 
     req.token = decoded;
+    // req.token.userId
     next();
   })
 };

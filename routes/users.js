@@ -43,4 +43,17 @@ router.post('/api/user', ev(validations.post), (req, res, next) => {
     });
 });
 
+router.get('/api/users', (_req, res, next) => {
+  knex('users')
+    .orderBy('id')
+    .then((rows) => {
+      const topics = camelizeKeys(rows);
+
+      res.send(topics);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 module.exports = router;

@@ -25,3 +25,9 @@ img {
 .brand-logo {
   margin-left: 2vw;
 }
+
+.postContainer {
+  margin-bottom: 0px;
+  min-height: 100%;
+  height: 100%;
+}

@@ -16,6 +16,7 @@
           <ul ng-controller="AuthCtrl as authCtrl" class="right">
             <li ng-show="authCtrl.isLoggedIn()"><a href="#topicTrigger" class="modal-trigger">Create Topic</a></li>
             <li ng-show="authCtrl.isLoggedIn()"><a ng-href="#/" ng-click="authCtrl.logout()">Logout</a></li>
+            <li ng-show="!authCtrl.isLoggedIn()"><a ng-href="#/registrationForm">Sign Up</a></li>
             <li ng-show="!authCtrl.isLoggedIn()"><a ng-href="#/login">Login</a></li>
           </ul>
         </div>
@@ -51,8 +52,8 @@
     <script src="js/app.js"></script>
     <script src="js/app.config.js"></script>
     <script src="js/services.js"></script>
-    <script src="js/directives.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
     <!-- <script src="js/materialize.min.js"></script> -->
     <!-- <script src="js/controllers.js"></script> -->
   </body>

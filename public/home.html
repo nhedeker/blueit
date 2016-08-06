@@ -1,7 +1,7 @@
-<div class="light-blue lighten-5">
+<div id="postContainer" class="light-blue lighten-5">
   <div class="row">
     <div class="input-field col s2 offset-s1">
-      <input ng-model="topicFilter" type="text" placeholder="Filter Posts by Topic">
+      <input ng-model="searchText" type="text" placeholder="Filter Posts by Topic Id">
     </div>
     <div class="input-field col s2 offset-s6">
       <select ng-model="posts.sortBy">
@@ -12,7 +12,7 @@
       <label>Sort By</label>
     </div>
   </div>
-  <div class="row" nh-posts ng-repeat="postInDirective in posts.data | orderBy : posts.sortBy | filter : { topicId : topicFilter }" post-attribute="postInDirective">
+  <div class="row" nh-posts ng-repeat="postInDirective in posts.data | orderBy : posts.sortBy | filter : { topicId : searchText }" post-attribute="postInDirective">
   </div>
 </div>
 

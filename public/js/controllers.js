@@ -119,4 +119,42 @@
       authSvc.logout();
     };
   };
+
+  // NEW FILE
+  app.controller('UserCtrl', UserCtrl);
+
+  UserCtrl.$inject = ['userSvc'];
+
+  function UserCtrl(userSvc) {
+    this.data = [];
+    this.postForm = {};
+
+    // this.registerUser = () => {
+    //   postsSvc.submitPost({
+    //     description: this.postForm.description,
+    //     title: this.postForm.title,
+    //     topicId: Number.parseInt(this.postForm.topicId),
+    //     imageUrl: this.postForm.imgUrl
+    //     })
+    //     .then((post) => {
+    //       this.data.push(post);
+    //       this.postForm = {};
+    //       $location.path('/');
+    //     })
+    //     .catch((err) => {
+    //       throw err;
+    //     });
+    // };
+
+    const activate = () => {
+      userSvc.getUsers().then((users) => {
+        this.data = users;
+      })
+      .catch((err) => {
+        throw err;
+      });
+    };
+
+    activate();
+  };
 })();
