@@ -11,7 +11,6 @@ module.exports.post = {
       .trim()
       .required(),
     password: Joi.string()
-      .alphanum()
       .label('Password')
       .trim()
       .required(),
