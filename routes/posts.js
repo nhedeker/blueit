@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get('/api/posts', (_req, res, next) => {
   knex('posts')
-    .orderBy('title')
+    .orderBy('created_at')
     .orderBy('rating')
     .then((rows) => {
       const posts = camelizeKeys(rows);
